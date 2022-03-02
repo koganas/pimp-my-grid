@@ -1,0 +1,129 @@
+$maxWidth: 1200px;
+$totalColumns: 12;
+$col: calc(100 / $totalColumns)%;
+$space: 2rem;
+
+.container {
+	max-width: $maxWidth;
+	margin: 0 auto;
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;	
+	
+	&--full:not(img) {
+		width: 100%;
+	}
+	&--head {
+		padding-top: 12rem;
+		@media (--md) {
+			padding-top: 5rem;
+		}
+	}
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	flex-flow: row;
+	flex-wrap: wrap;
+	justify-content: stretch;
+	width: 100%;
+	flex-basis: 100%;
+
+	&-justify {
+		justify-content: space-between;
+	}
+
+	@for @i from 1 to $totalColumns {
+		$width: calc( $col * @i );
+		.col-@i {
+			flex-basis: $width;
+			width: $width;
+		}
+		.col-offset-@i {
+			margin-left: $width;
+		}
+	}
+
+	.col {
+		&-center {
+			margin-left: auto;
+			margin-right: auto;
+		}
+		&-md-center {
+			@media(--md) {
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+		&-sm-center {
+			@media(--sm) {
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+	}
+
+	.pd {
+		& > * {
+			padding: 0 calc( $space / 2 );
+		}
+	}
+
+	.pdt, &.pdt { padding-top: $space; }
+	.pdb, &.pdb { padding-bottom: $space; }
+	.pdr, &.pdr { padding-right: $space; }
+	.pdl, &.pdl { padding-left: $space; }
+	.mgt, &.mgt { margin-top: $space; }
+	.mgb, &.mgb { margin-bottom: calc( $space * 1.5 ); }
+	.mgr, &.mgr { margin-right: $space; }
+	.mgl, &.mgl { margin-left: $space; }
+	
+	@media (--lg) {
+		@for @i from 1 to $totalColumns {
+			$width: calc( $col * @i );
+			.col-lg-@i {
+				flex-basis: $width;
+				width: $width;
+			}
+		}
+		
+		.col-offset-lg {
+			margin-left: 0;
+		}
+	}
+
+	@media (--md) {
+		@for @i from 1 to $totalColumns {
+			$width: calc( $col * @i );
+			.col-md-@i {
+				flex-basis: $width;
+				width: $width;
+			}
+		}
+
+		.col-offset-md {
+			margin-left: 0;
+		}
+	}
+
+	@media (--sm) {
+		@for @i from 1 to $totalColumns {
+			$width: calc( $col * @i );
+			.col-sm-@i {
+				flex-basis: $width;
+				width: $width;
+			}
+		}
+
+		.col-offset-sm {
+			margin-left: 0;
+		}
+		
+		.pdr { padding-right: 0; }
+		.pdl { padding-left: 0; }
+	}
+}
