@@ -12,6 +12,7 @@ function createColumns(columnRatio, totalColumns, gap) {
 		const columnWidth = gap ?
 			'calc(' + (columnRatio * i) + '% - ' + gap + ')' :
 			(columnRatio * i) + '%';
+
 		styles += `
       .col-${i} {
         flex-basis: ${columnWidth};
@@ -46,7 +47,7 @@ const Row = styled('div', columnsProps)`
 
 	&.gap {
 		//column-gap: ${props => props.gap};
-				
+
 		& > * {
 			margin: 0 calc( ${props => props.gap} / 2 );
 		}
@@ -64,6 +65,8 @@ const Row = styled('div', columnsProps)`
 			props.gap
     )
   };
+
+	
 `;
 
 export default Row;

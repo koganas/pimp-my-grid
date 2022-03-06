@@ -16,25 +16,20 @@
 				'border-pinkPanther': showError,
 				'text-base py-1.6': label === 'Title'
 			}"
-			@input="$emit('input', $event.target.value)"
+			@input="updateField"
 			v-mask="inputMask"
 		/>
 		<template v-if="showError">
 			<p class="text-xs text-pinkPanther mt-1">
 				{{ message }}
 			</p>
-			<Icon
-				name="error"
-				size="small"
-				fill
-				class="absolute right-0 top-icon mr-2 text-pinkPanther pointer-events-none"
-			/>
 		</template>
 	</label>
 </template>
 
 <script>
-//import { validateEmail, theMask as _mask } from '@/helpers/validation'
+import { validateEmail, theMask as _mask } from '@/helpers/validation'
+
 export default {
 	name: 'InputField',
 	directives: {
@@ -87,6 +82,10 @@ export default {
 		}
 	},
 	methods: {
+		updateField(e) {
+			this.$emit('input', e.target.value)
+			this.$store.dispatch('updateStore', this.value)
+		},
 		setMessage(errorType) {
 			let fieldName = this.label
 			if (fieldName === 'Enter the address') fieldName = 'Address' // Exception label
